@@ -5,6 +5,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -52,5 +54,25 @@ class AuthController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out successfully']);
+    }
+
+    public function checkAuth(Request $request)
+    {
+        try {
+            if (Auth::guard('sanctum')->check()) {
+                $user = Auth::guard('sanctum')->user();
+                return response()->json([
+                    'isAuthenticated' => true,
+                    'user' => $user
+                ]);
+            }
+            return response()->json(['isAuthenticated' => false]);
+        } catch (\Exception $e) {
+            Log::error('Auth check failed: ' . $e->getMessage());
+            return response()->json([
+                'isAuthenticated' => false,
+                'error' => 'An error occurred while checking authentication'
+            ], 500);
+        }
     }
 }
