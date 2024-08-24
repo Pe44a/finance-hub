@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import Routing from './routing';
 import './index.css';
-import App from './App';
+import axios from 'axios';
 import reportWebVitals from './reportWebVitals';
+
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.withCredentials = true;
+
+// Set up axios interceptor to include token in all requests
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    < Routing/>
   </React.StrictMode>
 );
 
