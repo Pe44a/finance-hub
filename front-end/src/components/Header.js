@@ -19,9 +19,7 @@ const Header = () => {
           <span className="text-lg font-semibold">Finance-hub</span>
         </Link>
         <nav className="flex items-center gap-4">
-          <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
-            Home
-          </Link>
+          
           {isLoggedIn ? (
             <>
               <Link to="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
@@ -36,6 +34,9 @@ const Header = () => {
             </>
           ) : (
             <>
+              <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
+              Home
+            </Link>
               <Link to="/login" className="text-sm font-medium hover:text-primary transition-colors">
                 Login
               </Link>
