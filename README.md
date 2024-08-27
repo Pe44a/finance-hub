@@ -2,7 +2,7 @@
 
 Finance-hub is a web application for personal finance management. It allows users to track their income, expenses, and view financial insights through a user-friendly dashboard.
 
-Check-out it here:https://finance-4qgqjxpvf-peteris-projects.vercel.app/
+Check-out it here:https://finance-hub-git-main-peteris-projects.vercel.app/
 
 ## Features
 
